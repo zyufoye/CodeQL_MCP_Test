@@ -27,7 +27,7 @@ def collect_all_queries(codeql_queries_root):
     return all_queries
 
 if __name__ == "__main__":
-    codeql_root = r"E:\\codeql\\codeql-main"
+    codeql_root = r"C:\Users\Aono\Desktop\Project\codeql-win64\codeql\codeql-main"
     queries = collect_all_queries(codeql_root)
     import json
     print(json.dumps(queries, indent=2, ensure_ascii=False)) 

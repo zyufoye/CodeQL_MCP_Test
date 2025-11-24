@@ -6,9 +6,9 @@ import shutil
 from .query_scanner import collect_all_queries, get_query_metadata
 
 # CodeQL路径配置
-CODEQL_PATH = "E:\\codeql"
+CODEQL_PATH = r"C:\Users\Aono\Desktop\Project\codeql-win64\codeql"
 CODEQL_BIN = os.path.join(CODEQL_PATH, "codeql.exe")
-CODEQL_QUERIES = r"E:\\codeql\\codeql-main"
+CODEQL_QUERIES = r"C:\Users\Aono\Desktop\Project\codeql-win64\codeql\codeql-main"
 
 def get_available_languages():
     """获取可用的编程语言列表"""

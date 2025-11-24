@@ -5,9 +5,9 @@ import uuid
 import shutil
 
 # CodeQL路径配置
-CODEQL_PATH = "E:\\codeql"
+CODEQL_PATH = r"C:\Users\Aono\Desktop\Project\codeql-win64\codeql"
 CODEQL_BIN = os.path.join(CODEQL_PATH, "codeql.exe")
-CODEQL_QUERIES = r"E:\\codeql\\codeql-main"
+CODEQL_QUERIES = r"C:\Users\Aono\Desktop\Project\codeql-win64\codeql\codeql-main"
 
 def get_available_languages():
     """获取可用的编程语言列表"""
@@ -49,6 +49,7 @@ def detect_language(src_path):
                 lang = extensions[ext]
                 ext_counts[lang] = ext_counts.get(lang, 0) + 1
     
+    print(f"[Test] detect_language 检测到的文件扩展名计数: {ext_counts}")
     if not ext_counts:
         return None
     

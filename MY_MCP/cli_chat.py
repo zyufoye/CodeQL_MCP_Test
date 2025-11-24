@@ -13,11 +13,19 @@ from pydantic import BaseModel
 import shutil
 
 # —— 配置区 —— #
-MODEL_PATH = "E:\\DeepSeek 1.5B"        # 模型路径
+# MODEL_PATH = "E:\\DeepSeek 1.5B"        # 模型路径
+# DEVICE      = "cuda" if torch.cuda.is_available() else "cpu"
+# OUTPUT_DIR = "results"  # 输出目录
+# CODEQL_PATH = r"C:\Users\Aono\Desktop\Project\codeql-win64\codeql"
+# CODEQL_QUERIES = r"C:\Users\Aono\Desktop\Project\codeql-win64\codeql\codeql-main"
+
+# —— 配置区 —— #
+MODEL_PATH = r"C:\Users\Aono\Desktop\Project\CodeQL_MCP_Test\deepseek-coder-1.3b"#"E:\\DeepSeek 1.5B"        # 模型路径
 DEVICE      = "cuda" if torch.cuda.is_available() else "cpu"
 OUTPUT_DIR = "results"  # 输出目录
-CODEQL_PATH = "E:\\codeql"
-CODEQL_QUERIES = r"E:\\codeql\\codeql-main"
+CODEQL_PATH = r"C:\Users\Aono\Desktop\Project\codeql-win64\codeql" # E:\\codeql"
+CODEQL_QUERIES = r"C:\Users\Aono\Desktop\Project\codeql-win64\codeql\codeql-main" # E:\\codeql\\codeql-main"
+
 
 # —— 加载模型 —— #
 print("加载模型中...", end="", flush=True)

@@ -8,11 +8,11 @@ from MCP_Tools.CodeQL.codeql_wrapper import call_codeql, detect_language
 from MCP_Tools.project_analyzer import analyze_project
 
 # —— 配置区 —— #
-MODEL_PATH = "E:\\DeepSeek 1.5B"        # 模型路径
+MODEL_PATH = r"C:\Users\Aono\Desktop\Project\CodeQL_MCP_Test\deepseek-coder-1.3b"#"E:\\DeepSeek 1.5B"        # 模型路径
 DEVICE      = "cuda" if torch.cuda.is_available() else "cpu"
 OUTPUT_DIR = "results"  # 输出目录
-CODEQL_PATH = "E:\\codeql"
-CODEQL_QUERIES = r"E:\\codeql\\codeql-main"
+CODEQL_PATH = r"C:\Users\Aono\Desktop\Project\codeql-win64\codeql" # E:\\codeql"
+CODEQL_QUERIES = r"C:\Users\Aono\Desktop\Project\codeql-win64\codeql\codeql-main" # E:\\codeql\\codeql-main"
 
 # —— 加载模型 —— #
 print("加载模型中...", end="", flush=True)
@@ -86,10 +86,13 @@ def auto_analyze_project(path):
     project_info = analyze_project(path)
     if "error" in project_info:
         return f"分析错误: {project_info['error']}"
+    
     # 2. 检测语言并执行CodeQL分析
     language = detect_language(path)
     if not language:
         return f"项目分析完成，但无法检测主要编程语言\n\n项目名称: {project_info['project_name']}\n文件总数: {project_info['total_files']}\n代码行数: {project_info['total_lines']}"
+    
+    
     # 自动选择 QLS 套件或 QL 单条规则
     query_path, reason = choose_query_file(path, project_info.get("available_queries", {}), language)
     if query_path and not os.path.isabs(query_path):
@@ -151,7 +154,7 @@ def chat_loop():
             
         # 检查是否是路径
         if is_valid_path(user_input):
-            # 直接分析项目
+            # 直接分析项目 ,卡在了这里
             result = auto_analyze_project(user_input)
             print(f"\n系统：{result}")
             continue
@@ -166,8 +169,11 @@ def chat_loop():
 如果用户询问了安全相关问题，请简洁专业地回答。
 """
 
+        # print(f"Prompt: {prompt}")
         # 模型推理
         inputs = tokenizer(prompt, return_tensors="pt").to(DEVICE)
+        print(f"输入tokens: {inputs}")
+        # print("\n")
         out = model.generate(**inputs, max_new_tokens=512)
         text = tokenizer.decode(out[0], skip_special_tokens=True)
         

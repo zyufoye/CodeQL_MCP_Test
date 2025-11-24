@@ -14,8 +14,8 @@ from MCP_Tools.CodeQL.codeql_wrapper import call_codeql, get_available_languages
 MODEL_PATH = "E:\\DeepSeek 1.5B"  # 模型路径
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 OUTPUT_DIR = "results"  # 输出目录
-CODEQL_PATH = "E:\\codeql"
-CODEQL_QUERIES = r"E:\\codeql\\codeql-main"
+CODEQL_PATH = r"C:\Users\Aono\Desktop\Project\codeql-win64\codeql"
+CODEQL_QUERIES = r"C:\Users\Aono\Desktop\Project\codeql-win64\codeql\codeql-main"
 
 class MCPLocal:
     def __init__(self):

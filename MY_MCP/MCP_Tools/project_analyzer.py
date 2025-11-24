@@ -74,7 +74,7 @@ def scan_project(project_path, max_files=100, file_extensions=None):
                 file_counter += 1
     
     # 自动扫描所有可用 QL/QLS 查询
-    codeql_root = r"E:\\codeql\\codeql-main"
+    codeql_root = r"C:\Users\Aono\Desktop\Project\codeql-win64\codeql\codeql-main"
     if os.path.exists(codeql_root):
         project_info['available_queries'] = collect_all_queries(codeql_root)
     else:
