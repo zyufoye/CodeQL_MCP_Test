@@ -216,7 +216,7 @@ def chat_loop():
 
         text = tokenizer.decode(out[0], skip_special_tokens=True)
         
-        print(f"[LLM Origin Output] 模型输出: {text} \n")
+        # print(f"[LLM Origin Output] 模型输出: {text} \n")
 
         # 提取实际回复内容，去除提示词部分
         lines = text.split('\n')
@@ -243,7 +243,7 @@ def chat_loop():
         if user_input in final_response:
             final_response = final_response.replace(user_input, "").strip()
         
-        print(f"\n系统：{final_response}")
+        print(f"\n [* System Final Response] {final_response}")
 
 if __name__ == "__main__":
     chat_loop()
