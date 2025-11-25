@@ -202,7 +202,6 @@ def chat_loop():
         #     repetition_penalty=1.1,  # 重复惩罚
         #     pad_token_id=tokenizer.eos_token_id  # 明确设置pad token
         # )
-        from transformers import StoppingCriteriaList, MaxLengthCriteria
         out = model.generate(
     **inputs,
     max_new_tokens=256,

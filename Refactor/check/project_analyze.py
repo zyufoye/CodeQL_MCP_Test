@@ -1,5 +1,6 @@
 import os
 from check.path_check import normalize_path
+from transformers import AutoModelForCausalLM, AutoTokenizer
 import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from config import *
@@ -165,7 +166,7 @@ def analyze_project(project_path, max_files=100): # 4
         "available_queries": project_info["available_queries"]
     }
 
-    print(f"项目摘要信息: {summary}")
+    # print(f"项目摘要信息: {summary}")
     
     return summary
 
@@ -217,6 +218,17 @@ def summarize_sarif(sarif_path):
                     "desc": msg
                 })
     return findings
+
+# —— 加载模型 —— #
+print("[Model] 模型加载中...", end="", flush=True)
+tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, trust_remote_code=True)
+model = AutoModelForCausalLM.from_pretrained(
+    MODEL_PATH,
+    device_map="auto",
+    dtype=torch.float16
+)
+model.eval()
+print("[Model] 模型加载完成！")
 
 def generate_natural_report(findings, project_info, user_input):
     prompt = f"""你是一名资深代码安全专家。请根据以下项目分析结果，生成一份专业、自然、面向开发者的安全分析报告。
