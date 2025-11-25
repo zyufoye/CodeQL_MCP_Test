@@ -2,7 +2,7 @@ import json
 import subprocess
 import os
 import re
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoModelForCausalLM, AutoTokenizer, StoppingCriteriaList
 import torch
 from MCP_Tools.CodeQL.codeql_wrapper import call_codeql, detect_language
 from MCP_Tools.project_analyzer import analyze_project
@@ -25,14 +25,14 @@ model = AutoModelForCausalLM.from_pretrained(
 model.eval()
 print(" 完成。")
 
-def normalize_path(path):
+def normalize_path(path): # 1
     """标准化路径，处理引号和反斜杠"""
     # 移除引号
     path = path.strip('"\'')
     # 确保路径分隔符正确
     return os.path.normpath(path)
 
-def is_valid_path(path):
+def is_valid_path(path): # 2
     """检查路径是否有效"""
     try:
         path = normalize_path(path)
@@ -75,7 +75,7 @@ def choose_query_file(user_input, available_queries, language):
         return lang_queries["ql"][0], "默认选择第一个规则"
     return None, "未找到合适的查询文件"
 
-def auto_analyze_project(path):
+def auto_analyze_project(path): # 3
     """自动分析项目并返回自然语言安全报告"""
     # 标准化路径
     path = normalize_path(path)
@@ -156,27 +156,68 @@ def chat_loop():
         if is_valid_path(user_input):
             # 直接分析项目 ,卡在了这里
             result = auto_analyze_project(user_input)
-            print(f"\n系统：{result}")
+            print(f"\n[System Final] 系统最终相应：{result}")
             continue
         
         # 构造 prompt
-        prompt = f"""你是代码安全专家，能理解用户需求并给出专业回答。
+        prompt1 = f"""你是代码安全专家，能理解用户需求并给出专业回答。
 用户请求：{user_input}
 
-如果用户提到了路径或项目分析，请回复：
-"我可以帮您分析项目，请提供完整的项目路径。例如Windows系统上的'C:\\项目路径'或Linux系统上的'/项目路径'"
+请根据用户输入的内容，提供相关的安全分析或建议：
+- 如果用户提供了项目路径，询问是否需要分析
+- 如果用户询问安全问题，给出专业回答
+- 如果输入不明确，询问更多细节
 
-如果用户询问了安全相关问题，请简洁专业地回答。
+请用简洁专业的语言回复。
+"""
+        
+
+        prompt2="""
+        如果用户提到了路径或项目分析，请回复：
+        "我可以帮您分析项目，请提供完整的项目路径。例如Windows系统上的'C:\\项目路径'或Linux系统上的'/项目路径'"
+
+        如果用户询问了安全相关问题，请简洁专业地回答。
+        """
+
+        prompt3 = f"""作为代码安全专家，请针对以下用户请求提供专业回答：
+
+用户请求：{user_input}
+
+请直接给出相关的安全分析或建议，不需要重复提示词内容。
 """
 
-        # print(f"Prompt: {prompt}")
+        print(f"Prompt: {prompt3}")
+        
         # 模型推理
-        inputs = tokenizer(prompt, return_tensors="pt").to(DEVICE)
-        print(f"输入tokens: {inputs}")
+        inputs = tokenizer(prompt3, return_tensors="pt").to(DEVICE)
+        # print(f"输入tokens: {inputs}")
         # print("\n")
-        out = model.generate(**inputs, max_new_tokens=512)
+        # out = model.generate(**inputs, max_new_tokens=512)
+        # out = model.generate(
+        #     **inputs, 
+        #     max_new_tokens=256,  # 减少最大token数
+        #     do_sample=True,      # 启用采样
+        #     temperature=0.7,     # 控制随机性
+        #     top_p=0.9,           # 核采样
+        #     repetition_penalty=1.1,  # 重复惩罚
+        #     pad_token_id=tokenizer.eos_token_id  # 明确设置pad token
+        # )
+        from transformers import StoppingCriteriaList, MaxLengthCriteria
+        out = model.generate(
+    **inputs,
+    max_new_tokens=256,
+    do_sample=True,
+    temperature=0.8,
+    top_p=0.9,
+    top_k=50,
+    repetition_penalty=1.1,
+    pad_token_id=tokenizer.eos_token_id,
+)
+
         text = tokenizer.decode(out[0], skip_special_tokens=True)
         
+        print(f"[LLM Origin Output] 模型输出: {text} \n")
+
         # 提取实际回复内容，去除提示词部分
         lines = text.split('\n')
         response_start = False

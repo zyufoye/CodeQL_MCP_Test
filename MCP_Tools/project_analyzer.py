@@ -26,7 +26,7 @@ def get_file_info(file_path):
             "error": str(e)
         }
 
-def scan_project(project_path, max_files=100, file_extensions=None):
+def scan_project(project_path, max_files=100, file_extensions=None): # 5
     """扫描项目结构，提取关键信息"""
     if not os.path.exists(project_path):
         return {"error": f"项目路径 {project_path} 不存在"}
@@ -131,7 +131,7 @@ def extract_imports(project_info):
     
     return imports
 
-def analyze_project(project_path, max_files=100):
+def analyze_project(project_path, max_files=100): # 4
     """分析项目并生成摘要信息"""
     project_info = scan_project(project_path, max_files)
     

@@ -1,7 +1,7 @@
 import os
 import glob
 
-def collect_all_queries(codeql_queries_root):
+def collect_all_queries(codeql_queries_root): # 6
     """
     自动收集所有语言下的 QLS 套件和 QL 单条规则路径。
     返回格式：
