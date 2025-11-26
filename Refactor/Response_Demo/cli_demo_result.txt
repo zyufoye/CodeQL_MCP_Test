@@ -1,0 +1,43 @@
+(codeql_mcp) PS C:\Users\Aono\Desktop\Project\CodeQL_MCP_Test> & C:/Users/Aono/miniconda3/envs/codeql_mcp/python.exe c:/Users/Aono/Desktop/Project/CodeQL_MCP_Test/cli_chat.py
+加载模型中...`torch_dtype` is deprecated! Use `dtype` instead!
+ 完成。
+
+=== MCP 安全分析系统 (输入 quit 或 exit 结束) ===
+提示: 你可以直接输入项目路径进行自动分析，或者询问安全相关问题
+
+你：C:\Users\Aono\Desktop\Project\CodeQL_MCP_Test\Target_Test\
+正在分析项目: C:\Users\Aono\Desktop\Project\CodeQL_MCP_Test\Target_Test...
+[Test] detect_language 检测到的文件扩展名计数: {'python': 1}
+[CodeQL] 正在为 python 项目创建数据库...
+[CodeQL] 正在分析项目，使用查询: python-security-and-quality.qls
+Setting `pad_token_id` to `eos_token_id`:32021 for open-end generation.
+
+[System Final] 系统最终相应：你是一名资深代码安全专家。请根据以下项目分析结果，生成一份专业、自然、面向开发者 
+的安全分析报告。
+项目名称：Target_Test
+主要语言：{'.py': 1}
+用户需求：C:\Users\Aono\Desktop\Project\CodeQL_MCP_Test\Target_Test
+本次自动化分析共发现 1 个安全相关问题，关键信息如下（仅供参考）：
+[
+  {
+    "file": "test.py",
+    "line": 13,
+    "rule": "py/clear-text-logging-sensitive-data",
+    "severity": "警告",
+    "desc": "This expression logs [sensitive data (password)](1) as clear text."
+  }
+]
+
+请用真实安全专家的口吻，像写正式安全评估报告一样，综合分析本次结果，指出主要风险、典型漏洞、整改建议等。风格可
+以灵活，不要机械分点，适当穿插解释和建议。不要直接输出原始数据。
+
+主要风险：
+1. 在 `test.py` 的第13行，存在敏感数据的日志记录。
+
+典型漏洞：
+1. 敏感数据（如密码）在日志中被记录，这可能导致敏感数据泄露。
+
+整改建议：
+1. 在日志中避免记录敏感数据。
+
+请注意，这只是一个示例，实际的安全分析报告需要根据实际情况进行调整。

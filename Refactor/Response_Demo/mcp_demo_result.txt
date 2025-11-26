@@ -1,0 +1,96 @@
+(codeql_mcp) PS C:\Users\Aono\Desktop\Project\CodeQL_MCP_Test> & C:/Users/Aono/miniconda3/envs/codeql_mcp/python.exe c:/Users/Aono/Desktop/Project/CodeQL_MCP_Test/Refactor/main_mcp_demo.py C:\Users\Aono\Desktop\Project\CodeQL_MCP_Test\Target_Test\
+[Model] 模型加载中...[Model] 模型加载完成！
+正在加载模型... [Model] [MCP] 模型加载完成......
+==================================================
+开始分析项目: C:\Users\Aono\Desktop\Project\CodeQL_MCP_Test\Target_Test\
+==================================================
+
+[1/3] 正在分析项目结构...
+项目分析完成:
+• 项目名称: 
+• 文件总数: 1
+• 代码行数: 77
+• 文件类型: .py(1)
+• 详细信息已保存到: C:\Users\Aono\Desktop\Project\CodeQL_MCP_Test\results\Test\project_info_20251126_085810.json
+
+[2/3] 正在使用CodeQL进行安全分析...
+[Test] detect_language 检测到的文件扩展名计数: {'python': 1}
+• 检测到项目主要语言: python
+[CodeQL] 正在为 python 项目创建数据库...
+[CodeQL] 正在分析项目，使用查询: python-security-and-quality.qls
+CodeQL分析完成
+• 发现 1 个潜在问题
+• 严重程度: 高风险(0), 中风险(0), 低风险(1)
+• 详细结果已保存到: C:\Users\Aono\Desktop\Project\CodeQL_MCP_Test\results\Test\codeql_results_20251126_085810.sarif
+
+[3/3] 正在使用大模型进行综合分析...
+Setting `pad_token_id` to `eos_token_id`:32021 for open-end generation.
+
+大模型安全评估:
+----------------------------------------
+你是一个代码安全分析专家，请根据以下项目信息和CodeQL分析结果，对该项目进行全面的安全评估:
+
+项目名称:
+项目路径: C:\Users\Aono\Desktop\Project\CodeQL_MCP_Test\Target_Test\
+文件总数: 1
+代码行数: 77
+主要语言: python
+
+CodeQL分析发现了 1 个潜在问题。
+
+请提供以下内容:
+1. 项目安全总体评分(1-10分)
+2. 主要安全问题分类和严重程度
+3. 针对性修复建议
+4. 安全加固方案
+
+请以中文回答，回答要简洁专业。
+
+1. 项目安全总体评分(1-10分)
+2. 主要安全问题分类和严重程度
+3. 针对性修复建议
+4. 安全加固方案
+
+1. 项目安全总体评分(1-10分)
+
+根据CodeQL分析结果，项目的安全总体评分为8.5/10。这意味着项目存在一些潜在的安全问题，但总体上来说，项目的安全性
+还不错。
+
+2. 主要安全问题分类和严重程度
+
+- 代码覆盖率问题: 这是一种常见的安全问题，可能导致代码被错误地覆盖，从而使代码的安全性降低。这可能需要进行代码
+的重构和优化，以提高代码的安全性。
+
+- 代码质量问题: 代码的质量也可能影响代码的安全性。这可能需要进行代码的重构和优化，以提高代码的质量。
+
+3. 针对性修复建议
+
+针对代码覆盖率问题，可以通过以下方式进行修复:
+
+- 重构代码，增加代码覆盖率。
+- 优化代码，减少代码行数。
+
+针对代码质量问题，可以通过以下方式进行修复:
+
+针对代码质量问题，可以通过以下方式进行修复:
+
+
+- 重构代码，提高代码质量。
+- 优化代码，减少代码行数。
+
+4. 安全加固方案
+
+- 重构代码，提高代码质量。
+- 优化代码，减少代码行数。
+- 增加代码覆盖率。
+- 定期进行代码审查和测试，以确保代码的安全性和质量。
+
+以上是基于CodeQL分析结果的建议，具体的修复方案可能需要根据项目的具体情况进行调整。
+
+----------------------------------------
+
+完整分析报告已保存到: C:\Users\Aono\Desktop\Project\CodeQL_MCP_Test\results\Test\ai_analysis_20251126_085810.txt
+
+==================================================
+分析完成！全部结果已保存到 results 目录
+==================================================
