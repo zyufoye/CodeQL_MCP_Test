@@ -1,6 +1,6 @@
 from huggingface_hub import snapshot_download
 
-# Hugging Face 模型名称（可改成你要的 DeepSeek 模型）
+# Hugging Face 模型名称（可改成需要的测试模型）注意需要是 instruct 版本
 # model_name = "deepseek-ai/DeepSeek-Coder-1.3B-base"
 model_name = "deepseek-ai/DeepSeek-Coder-1.3B-instruct"
 

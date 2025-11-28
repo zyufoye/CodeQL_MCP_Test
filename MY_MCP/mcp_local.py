@@ -11,7 +11,7 @@ from MCP_Tools.project_analyzer import analyze_project
 from MCP_Tools.CodeQL.codeql_wrapper import call_codeql, get_available_languages, get_available_queries, detect_language
 
 # ------ 配置区 ------ #
-MODEL_PATH = "E:\\DeepSeek 1.5B"  # 模型路径
+MODEL_PATH = r"C:\Users\Aono\Desktop\Project\CodeQL_MCP_Test\deepseek-coder-1.3b" #"E:\\DeepSeek 1.5B"  # 模型路径
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 OUTPUT_DIR = "results"  # 输出目录
 CODEQL_PATH = r"C:\Users\Aono\Desktop\Project\codeql-win64\codeql"

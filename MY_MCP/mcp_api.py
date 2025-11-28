@@ -64,7 +64,7 @@ def load_model():
     import torch
     from transformers import AutoModelForCausalLM, AutoTokenizer
     
-    MODEL_PATH = "E:\\DeepSeek 1.5B"  # 模型路径
+    MODEL_PATH = r"C:\Users\Aono\Desktop\Project\CodeQL_MCP_Test\deepseek-coder-1.3b" #"E:\\DeepSeek 1.5B"  # 模型路径
     print("正在加载模型...", end="", flush=True)
     
     tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, trust_remote_code=True)
