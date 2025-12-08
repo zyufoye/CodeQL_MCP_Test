@@ -59,7 +59,7 @@ class MCPLocal:
             trust_remote_code=True
         )
         self.model.eval()
-        print(" 完成。")
+        print(" [Model] 模型加载完成。")
         return self.model, self.tokenizer
     
     def query_model(self, prompt, max_tokens=1024):
